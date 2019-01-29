@@ -8,6 +8,14 @@ class Student(models.Model):
     email = models.TextField(unique=True)
     password = models.CharField(max_length=45)
     objects = Validator()
+
+
+
+
+
+
+
+    
     def __repr__(self):
         return f"{self.first_name, self.last_name, self.email, self.password}" 
 
