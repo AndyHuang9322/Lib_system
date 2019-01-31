@@ -73,22 +73,22 @@
                 </div>
                 <div class="content">
                     <h5>Books</h5>
-                    {% for message in all_messages reversed %}
+                    {% for book in all_books reversed %}
                     <div class="quotes">
-                        {{message.user_author}}: "{{message.user_message}}"
+                        {{book.user_author}}: "{{book.user_message}}"
                         <p></p>
-                        <b>Posted by:</b> <a href="user/{{message.posted_by.id}}">{{message.posted_by.first_name}}
-                            {{message.posted_by.last_name}}</a>
+                        <b>Posted by:</b> <a href="user/{{book.posted_by.id}}">{{book.posted_by.first_name}}
+                            {{book.posted_by.last_name}}</a>
                         <br>
-                        <b>Created at:</b>{{message.created_at}}
+                        <b>Created at:</b>{{book.created_at}}
                         <p></p>
 
-                        <b></b>{{message.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{message.id}}"><button>Like!</button></a>
-                        {% for user in message.user_like.all.values %}
+                        <b></b>{{book.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{message.id}}"><button>Like!</button></a>
+                        {% for user in book.user_like.all.values %}
                         <li>{{user.first_name}} {{user.last_name}} </li>
                         {% endfor %}
-                        {% if message.posted_by.first_name == user.first_name %}
-                        {% if message.posted_by.last_name == user.last_name %}
+                        {% if book.posted_by.first_name == user.first_name %}
+                        {% if book.posted_by.last_name == user.last_name %}
                         <form action="/delete/{{message.id}}" method="POST">
                             {% csrf_token %}
                             <a href="/delete/{{message.id}}">Delete</a>
