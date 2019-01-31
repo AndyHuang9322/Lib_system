@@ -46,6 +46,10 @@ def login(request):
     else:
         return render(request,'index.html')
 
+def rent_book(request, book_id):
+    return redirect('/')
+
+
 def logout(request):
     request.session.clear()
     return redirect('/')

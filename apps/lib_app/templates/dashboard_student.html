@@ -75,6 +75,18 @@
                     <h5>Books</h5>
                     {% for book in all_books reversed %}
                     <div class="quotes">
+<<<<<<< HEAD:apps/lib_app/templates/dashboard_student.html
+                        {{book.user_author}}: "{{book.user_message}}"
+                        <p></p>
+                        <b>Posted by:</b> <a href="user/{{book.posted_by.id}}">{{book.posted_by.first_name}}
+                            {{book.posted_by.last_name}}</a>
+                        <br>
+                        <b>Created at:</b>{{book.created_at}}
+                        <p></p>
+
+                        <b></b>{{book.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{message.id}}"><button>Like!</button></a>
+                        {% for user in book.user_like.all.values %}
+=======
                         <b>Author:</b> {{book.author}}{{message.user_message}}
                         <p></p>
                         <b>Title: </b>{{book.title}}
@@ -85,10 +97,11 @@
                         <p></p>
                         <b></b>{{book.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{book.id}}"><button>Like!</button></a>
                         {% for user in message.user_like.all.values %}
+>>>>>>> 37720d82ffa32bcef5f119e63a57481c8bc0f518:apps/lib_app/templates/dashboard.html
                         <li>{{user.first_name}} {{user.last_name}} </li>
                         {% endfor %}
-                        {% if message.posted_by.first_name == user.first_name %}
-                        {% if message.posted_by.last_name == user.last_name %}
+                        {% if book.posted_by.first_name == user.first_name %}
+                        {% if book.posted_by.last_name == user.last_name %}
                         <form action="/delete/{{message.id}}" method="POST">
                             {% csrf_token %}
                             <a href="/delete/{{message.id}}">Delete</a>
