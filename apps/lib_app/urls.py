@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^logout$', views.logout),
 #dashboard:
     url(r'^quotes$', views.show),
+     url(r'^post/(?P<id>\d+)$', views.add_book)
 ]

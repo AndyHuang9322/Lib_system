@@ -30,6 +30,26 @@ class Validator(models.Manager):
                 response['errors'].append('This email already exists.')
                 response['valid'] = False
         return response
+    
+    def book_validator(self, postData,id):
+        errors = []
+        if len(postData['author']) < 3:
+            errors.append("Author name should be at least 3 characters")
+        if len(postData['title']) < 2:
+            errors.append("Author name should be at least 2 characters")
+        if len(postData['description']) < 10:
+            errors.append("Descriptions should be at least 10 characters")
+         
+        response = {
+            'errors': errors,
+            'valid': True,
+            'user': None
+        }
+        if len(errors)>0:
+            response['valid'] = False
+        else:
+                response['user'] = Book.objects.create(author=postData['author'], title=postData['title'], description=postData['description'] )
+        return response
 
 class User(models.Model):
     permissions = models.CharField(max_length=10, default='student')
