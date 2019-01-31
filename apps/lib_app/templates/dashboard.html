@@ -53,72 +53,77 @@
 <body>
     <div class="container">
         <div class="row">
+            <nav class="navbar navbar-light bg-light justify-content-between">
+                <a class="navbar-brand"> <h5>Welcome {{user.first_name}} {{user.last_name}}!</h5></a>
+                <p>
+                    <u><a href='/myaccount/{{user.id}}'>Edit My Account</a></u> &emsp;
+                    <a href='/logout'><button>Log Out</button></a>
+                </p>
+            </nav>
             <div class="col">
             </div>
             <div class="col-8">
                 <div class="wrapper">
                     <div class="header1">
-                        <h5>Welcome {{user.first_name}} {{user.last_name}}!</h5>
+
                     </div>
                     <div class="header2">
-                        <p>
-                            <u><a href='/myaccount/{{user.id}}'>Edit My Account</a></u> &emsp;
-                            <a href='/logout'><button>Log Out</button></a>
-                        </p>
+
                     </div>
                 </div>
                 <div class="content">
                     <h5>Books</h5>
                     {% for message in all_messages reversed %}
                     <div class="quotes">
-                    {{message.user_author}}: "{{message.user_message}}"
-                    <p></p>
-                    <b>Posted by:</b> <a href="user/{{message.posted_by.id}}">{{message.posted_by.first_name}} {{message.posted_by.last_name}}</a>
-                    <br>
-                    <b>Created at:</b>{{message.created_at}}
-                    <p></p>
-                    
-                    <b></b>{{message.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{message.id}}"><button>Like!</button></a>
-                    {% for user in message.user_like.all.values %}
+                        {{message.user_author}}: "{{message.user_message}}"
+                        <p></p>
+                        <b>Posted by:</b> <a href="user/{{message.posted_by.id}}">{{message.posted_by.first_name}}
+                            {{message.posted_by.last_name}}</a>
+                        <br>
+                        <b>Created at:</b>{{message.created_at}}
+                        <p></p>
+
+                        <b></b>{{message.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{message.id}}"><button>Like!</button></a>
+                        {% for user in message.user_like.all.values %}
                         <li>{{user.first_name}} {{user.last_name}} </li>
-                    {% endfor %}
+                        {% endfor %}
                         {% if message.posted_by.first_name == user.first_name %}
-                            {% if message.posted_by.last_name == user.last_name %}
-                                <form action="/delete/{{message.id}}" method="POST">
-                                    {% csrf_token %}
-                                    <a href="/delete/{{message.id}}">Delete</a>
-                                </form>
-                            {% endif %}
+                        {% if message.posted_by.last_name == user.last_name %}
+                        <form action="/delete/{{message.id}}" method="POST">
+                            {% csrf_token %}
+                            <a href="/delete/{{message.id}}">Delete</a>
+                        </form>
+                        {% endif %}
                         {% endif %}
                     </div>
                     {% endfor %}
                 </div>
 
-            <div class="post">
-                <form action="/post/{{user.id}}" method="POST">
-                    {% csrf_token %}
-                    {% if messages %}
-                            <ul class="messages">
-                                {% for message in messages %}
-                                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-                                        {{ message }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                    {% endif %}
-                    <h5>Add a Book!</h5>
-                    Author: <input type="text" name="author">
-                    Descriptions: <textarea name="message" rows="5" cols="30"></textarea>
-                    <br>
-                    <button type="submit">Submit</button>
-                </form>
+                <div class="post">
+                    <form action="/post/{{user.id}}" method="POST">
+                        {% csrf_token %}
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                {{ message }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <h5>Add a Book!</h5>
+                        Author: <input type="text" name="author">
+                        Descriptions: <textarea name="message" rows="5" cols="30"></textarea>
+                        <br>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col">
             </div>
         </div>
-
-        <div class="col">
-        </div>
-    </div>
     </div>
 </body>
 
