@@ -46,6 +46,11 @@ def login(request):
     else:
         return render(request,'index.html')
 
+def logout(request):
+    request.session.clear()
+    return redirect('/')
+
+
 def show(request):
     if 'fname' in request.session:
         user = User.objects.get(first_name=request.session['fname'])
