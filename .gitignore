@@ -1,6 +1,5 @@
 db.sqlite3
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 
 lib_system/__pycache__/
 *.log
@@ -9,8 +8,7 @@ lib_system/__pycache__/
 # __pycache__/
 local_settings.py
 apps/lib_app/__pycache__/
-=======
-=======
+.DS_Store
 .vscode/
 __pycache__
->>>>>>> Stashed changes
+
