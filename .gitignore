@@ -1,7 +1,9 @@
 db.sqlite3
-# lib_system/__pycache__/
+
+lib_system/__pycache__/
 *.log
 *.pot
 *.pyc
-__pycache__/
+# __pycache__/
 local_settings.py
+apps/lib_app/__pycache__/
