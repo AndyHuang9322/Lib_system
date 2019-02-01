@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Edit Account</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <style>
+        .header1,
+        .header2 {
+            display: inline-block;
+            margin-top: 2%;
+        }
+        .header2{
+            margin-left: 61%;
+        }
+        .messages{
+            color: red;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-8">
+                <div class="wrapper">
+                    <div class="header1">
+                        <h5>Edit Book</h5>
+                    </div>
+                    <div class="header2">
+                        <p>
+                            <u><a href='/back'>Back</a></u> &emsp;
+                            <a href='/logout'><button>Log Out</button></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="content">
+                    <form action="/update/{{book.id}}" method="POST">
+                        {% csrf_token %}
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                        {{ message }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <b>Author:</b> <br><input type="text" name="author" value="{{book.author}}"><p></p>
+                        <b>Title:</b> <br><input type="text" name="title" value="{{book.title}}"><br><p></p>
+                        <b>Description:</b> <br><textarea name="description" rows="5" cols="30">{{book.description}}</textarea><br>
+                        <button type="submit">Update</button>
+                    </form>
+                </div>
+            </div>
+        <div class="col">
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

@@ -78,3 +78,33 @@ def add_book(request,id):
         for error in check_response['errors']:
             messages.add_message(request, messages.ERROR, error)
         return render(request, 'dashboard.html', context)
+
+def like(request,id,book):
+    user = User.objects.get(id=id)
+    book = Book.objects.get(id=book)
+
+    if user in book.user_like.all():
+        return redirect('/quotes')
+    else:
+        book.user_like.add(user)
+        count = book.user_like.all().count()
+        all_books = Book.objects.all()
+        context = {
+            'count': count,
+            'user': user,
+            'all_books': all_books
+        }
+        return render(request, 'dashboard.html', context)
+
+def edit_book(request,id):
+    book = Book.objects.get(id=id)
+    context = {'book': book}
+    return render(request,'edit_book.html',context)
+
+def delete(request,id):
+    d = Book.objects.get(id=id)
+    d.delete()
+    return redirect('/quotes')
+
+def back(request):
+    return redirect('/quotes')

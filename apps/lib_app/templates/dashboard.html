@@ -47,6 +47,9 @@
             font-size: 5px;
             color: purple;
         }
+        .button1, .button2, .button3{
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -54,7 +57,9 @@
     <div class="container">
         <div class="row">
             <nav class="navbar navbar-light bg-light justify-content-between">
-                <a class="navbar-brand"> <h5>Welcome {{user.first_name}} {{user.last_name}}!</h5></a>
+                <a class="navbar-brand">
+                    <h5>Welcome {{user.first_name}} {{user.last_name}}!</h5>
+                </a>
                 <p>
                     <u><a href='/myaccount/{{user.id}}'>Edit My Account</a></u> &emsp;
                     <a href='/logout'><button>Log Out</button></a>
@@ -83,18 +88,21 @@
                         <p></p>
                         <b>Created at:</b> {{book.created_at}}
                         <p></p>
-                        <b></b>{{book.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{book.id}}"><button>Like!</button></a>
-                        {% for user in message.user_like.all.values %}
-                        <li>{{user.first_name}} {{user.last_name}} </li>
-                        {% endfor %}
-                        {% if message.posted_by.first_name == user.first_name %}
-                        {% if message.posted_by.last_name == user.last_name %}
-                        <form action="/delete/{{message.id}}" method="POST">
-                            {% csrf_token %}
-                            <a href="/delete/{{message.id}}">Delete</a>
-                        </form>
-                        {% endif %}
-                        {% endif %}
+                        <b></b>{{book.user_like.count}} people have liked this book: &emsp;
+                        <br>
+                        <div id="buttons">
+                            <div class="button1">
+                                <a href="/like/{{user.id}}/{{book.id}}"><button>Like</button></a>
+                            </div>
+                            <div class="button2">
+                                <a href="/edit_book/{{book.id}}"><button>Edit</button></a>
+                            </div>
+                            <div class="button3">
+                                {% if user.permission == admin %}
+                                    <a href="/delete/{{book.id}}"><button>Delete</button></a>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
@@ -115,15 +123,17 @@
                         <h5>Add a Book!</h5>
                         Author: <input type="text" name="author"><br>
                         Title: <br><input type="text" name="title">
+                        <p></p>
                         Descriptions: <textarea name="description" rows="5" cols="30"></textarea>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
             </div>
-
-            <div class="col">
-            </div>
         </div>
+
+        <div class="col">
+        </div>
+    </div>
     </div>
 </body>
 
