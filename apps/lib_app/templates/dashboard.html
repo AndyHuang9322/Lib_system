@@ -73,17 +73,17 @@
                 </div>
                 <div class="content">
                     <h5>Books</h5>
-                    {% for message in all_messages reversed %}
+                    {% for book in all_books reversed %}
                     <div class="quotes">
-                        {{message.user_author}}: "{{message.user_message}}"
+                        <b>Author:</b> {{book.author}}{{message.user_message}}
                         <p></p>
-                        <b>Posted by:</b> <a href="user/{{message.posted_by.id}}">{{message.posted_by.first_name}}
-                            {{message.posted_by.last_name}}</a>
-                        <br>
-                        <b>Created at:</b>{{message.created_at}}
+                        <b>Title: </b>{{book.title}}
                         <p></p>
-
-                        <b></b>{{message.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{message.id}}"><button>Like!</button></a>
+                        <b>Description:</b> {{book.description}}</b> <a href="user/{{message.posted_by.id}}"></a>
+                        <p></p>
+                        <b>Created at:</b> {{book.created_at}}
+                        <p></p>
+                        <b></b>{{book.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{book.id}}"><button>Like!</button></a>
                         {% for user in message.user_like.all.values %}
                         <li>{{user.first_name}} {{user.last_name}} </li>
                         {% endfor %}
@@ -113,9 +113,9 @@
                         </ul>
                         {% endif %}
                         <h5>Add a Book!</h5>
-                        Author: <input type="text" name="author">
-                        Descriptions: <textarea name="message" rows="5" cols="30"></textarea>
-                        <br>
+                        Author: <input type="text" name="author"><br>
+                        Title: <br><input type="text" name="title">
+                        Descriptions: <textarea name="description" rows="5" cols="30"></textarea>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
