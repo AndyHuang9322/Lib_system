@@ -15,7 +15,6 @@ class Validator(models.Manager):
             errors.append("Password should be at least 8 characters")
         if postData['cpw']!=postData['pw']:
             errors.append("Confirm password should be the same as password")
-         
         response = {
             'errors': errors,
             'valid': True,

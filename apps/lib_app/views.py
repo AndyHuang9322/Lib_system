@@ -20,6 +20,9 @@ def register(request):
     if request.method == 'POST':
         check_response = User.objects.registration_validator(request.POST)
     if check_response['valid']:
+        # if check_response['user'].permissions == 'admin':
+        #     request.session['id'] = check_response['user'].id                  # this is to see if the user that logs in is and admin or student 
+        #     return redirect('/quotes_admin')
         request.session['fname'] = check_response['user'].first_name
         return redirect('/quotes') 
     else:
