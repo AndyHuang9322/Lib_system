@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up | Coding Dojo Library</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <style>
+        button {
+                margin-top: 2%;
+            }
+            .messages{
+                color: red;
+                font-size: 15px;
+            }
+            .container{
+                margin-top: 1%;
+            }
+        </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-4">
+                <h2>Coding Dojo Library</h2>
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-4">
+                <div class="">
+                    <form class="px-4 py-3" action="/register" method="POST">
+                        {% csrf_token %}
+                        <h3>Register</h3>
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                {{ message }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="exampleDropdownFormEmail1">First Name</label>
+                            <input type="text" name="fname" class="form-control" id="exampleDropdownFormEmail1"
+                                placeholder="First Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleDropdownFormEmail1">Last Name</label>
+                            <input type="text" name="lname" class="form-control" id="exampleDropdownFormEmail1"
+                                placeholder="Last Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleDropdownFormEmail1">Email address</label>
+                            <input type="text" name="email" class="form-control" id="exampleDropdownFormEmail1"
+                                placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleDropdownFormPassword1">Password</label>
+                            <input type="password" name="pw" class="form-control" id="exampleDropdownFormPassword1"
+                                placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleDropdownFormPassword1">Confirm Password</label>
+                            <input type="password" name="cpw" class="form-control" id="exampleDropdownFormPassword1"
+                                placeholder="Confirm password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </form>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/">Already registered? Log in</a>
+                </div>
+            </div>
+            <!--   register ends -->
+            <div class="col"></div>
+        </div>
+    </div>
+</body>
+
+</html>

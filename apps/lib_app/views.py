@@ -17,6 +17,8 @@ def index(request):
         return render(request,'index.html')
 
 def register(request):
+    if request.method == 'GET':
+        return render (request, 'register.html')
     if request.method == 'POST':
         check_response = User.objects.registration_validator(request.POST)
     if check_response['valid']:
@@ -25,7 +27,7 @@ def register(request):
     else:
         for error in check_response['errors']:
             messages.add_message(request, messages.ERROR, error)
-        return render(request,'index.html')
+        return render(request,'register.html')
 
 def login(request):
     errors=[]
