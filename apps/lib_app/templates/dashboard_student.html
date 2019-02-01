@@ -1,143 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8" />
-    <title>Student Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-        crossorigin="anonymous">
-    <style>
-        .header1,
-        .header2 {
-            display: inline-block;
-            margin-top: 2%;
-        }
-        .header2{
-            margin-left: 40%;
-        }
-        .wrapper{
-            border-bottom: solid black 2px;
-        }
-        .content, .post{
-            display: inline-block;
-            vertical-align: top;
-            margin-top: 5%;
-        }
-        .content{
-            margin-left: 5%;
-            width: 40%;
-        }
-        .quotes{
-            border: solid black 2px;
-            padding: 2%;
-            margin-bottom: 1%;
-        }
-        .post{
-            margin-left: 15%;
-            width: 30%;
-        }
-        h5{
-            text-align: center;
-        }
-        .messages{
-            color: red;
-            font-size: 10px;
-        }
-        li{
-            font-size: 5px;
-            color: purple;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <div class="row">
-            <nav class="navbar navbar-light bg-light justify-content-between">
-                <a class="navbar-brand"> <h5>Welcome {{user.first_name}} {{user.last_name}}!</h5></a>
-                <p>
-                    <u><a href='/myaccount/{{user.id}}'>Edit My Account</a></u> &emsp;
-                    <a href='/logout'><button>Log Out</button></a>
-                </p>
-            </nav>
-            <div class="col">
-            </div>
-            <div class="col-8">
-                <div class="wrapper">
-                    <div class="header1">
-
-                    </div>
-                    <div class="header2">
-
-                    </div>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+            iv class="container">
+            <div class="row">
+                <nav class="navbar navbar-light bg-light justify-content-between">
+                    <a class="navbar-brand"> <h5>Welcome {{user.first_name}} {{user.last_name}}!</h5></a>
+                    <p>
+                        <u><a href='/myaccount/{{user.id}}'>Edit My Account</a></u> &emsp;
+                        <a href='/logout'><button>Log Out</button></a>
+                    </p>
+                </nav>
+                <div class="col">
                 </div>
-                <div class="content">
-                    <h5>Books</h5>
-                    {% for book in all_books reversed %}
-                    <div class="quotes">
-<<<<<<< HEAD:apps/lib_app/templates/dashboard_student.html
-                        {{book.user_author}}: "{{book.user_message}}"
-                        <p></p>
-                        <b>Posted by:</b> <a href="user/{{book.posted_by.id}}">{{book.posted_by.first_name}}
-                            {{book.posted_by.last_name}}</a>
-                        <br>
-                        <b>Created at:</b>{{book.created_at}}
-                        <p></p>
-
-                        <b></b>{{book.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{message.id}}"><button>Like!</button></a>
-                        {% for user in book.user_like.all.values %}
-=======
-                        <b>Author:</b> {{book.author}}{{message.user_message}}
-                        <p></p>
-                        <b>Title: </b>{{book.title}}
-                        <p></p>
-                        <b>Description:</b> {{book.description}}</b> <a href="user/{{message.posted_by.id}}"></a>
-                        <p></p>
-                        <b>Created at:</b> {{book.created_at}}
-                        <p></p>
-                        <b></b>{{book.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{book.id}}"><button>Like!</button></a>
-                        {% for user in message.user_like.all.values %}
->>>>>>> 37720d82ffa32bcef5f119e63a57481c8bc0f518:apps/lib_app/templates/dashboard.html
-                        <li>{{user.first_name}} {{user.last_name}} </li>
-                        {% endfor %}
-                        {% if book.posted_by.first_name == user.first_name %}
-                        {% if book.posted_by.last_name == user.last_name %}
-                        <form action="/delete/{{message.id}}" method="POST">
-                            {% csrf_token %}
-                            <a href="/delete/{{message.id}}">Delete</a>
-                        </form>
-                        {% endif %}
-                        {% endif %}
+                <div class="col-8">
+                    <div class="wrapper">
+                        <div class="header1">
+    
+                        </div>
+                        <div class="header2">
+    
+                        </div>
                     </div>
-                    {% endfor %}
-                </div>
-
-                <div class="post">
-                    <form action="/post/{{user.id}}" method="POST">
-                        {% csrf_token %}
-                        {% if messages %}
-                        <ul class="messages">
-                            {% for message in messages %}
-                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-                                {{ message }}
-                            </li>
+                    <div class="content">
+                        <h5>Books</h5>
+                        {% for book in all_books reversed %}
+                        <div class="quotes">
+                            {{book.user_author}}: "{{book.user_message}}"
+                            <p></p>
+                            <b>Posted by:</b> <a href="user/{{book.posted_by.id}}">{{book.posted_by.first_name}}
+                                {{book.posted_by.last_name}}</a>
+                            <br>
+                            <b>Created at:</b>{{book.created_at}}
+                            <p></p>
+    
+                            <b></b>{{book.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{message.id}}"><button>Like!</button></a>
+                            {% for user in book.user_like.all.values %}
+                            <b>Author:</b> {{book.author}}{{message.user_message}}
+                            <p></p>
+                            <b>Title: </b>{{book.title}}
+                            <p></p>
+                            <b>Description:</b> {{book.description}}</b> <a href="user/{{message.posted_by.id}}"></a>
+                            <p></p>
+                            <b>Created at:</b> {{book.created_at}}
+                            <p></p>
+                            <b></b>{{book.user_like.count}} people have liked this: &emsp;<a href="/like/{{user.id}}/{{book.id}}"><button>Like!</button></a>
+                            {% for user in message.user_like.all.values %}
+                            <li>{{user.first_name}} {{user.last_name}} </li>
                             {% endfor %}
-                        </ul>
-                        {% endif %}
-                        <h5>Add a Book!</h5>
-                        Author: <input type="text" name="author"><br>
-                        Title: <br><input type="text" name="title">
-                        Descriptions: <textarea name="description" rows="5" cols="30"></textarea>
-                        <button type="submit">Submit</button>
-                    </form>
+                            {% if book.posted_by.first_name == user.first_name %}
+                            {% if book.posted_by.last_name == user.last_name %}
+                            <form action="/delete/{{message.id}}" method="POST">
+                                {% csrf_token %}
+                                <a href="/delete/{{message.id}}">Delete</a>
+                            </form>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+    
+                    <div class="post">
+                        <form action="/post/{{user.id}}" method="POST">
+                            {% csrf_token %}
+                            {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                    {{ message }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <h5>Add a Book!</h5>
+                            Author: <input type="text" name="author"><br>
+                            Title: <br><input type="text" name="title">
+                            Descriptions: <textarea name="description" rows="5" cols="30"></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col">
+    
+                <div class="col">
+                </div>
             </div>
         </div>
-    </div>
-</body>
-
+    </body>
 </html>
